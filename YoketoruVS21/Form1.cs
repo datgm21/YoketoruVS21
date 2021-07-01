@@ -67,6 +67,7 @@ namespace YoketoruVS21
                 {
                     chrs[i].Text = ItemText;
                 }
+                chrs[i].Font = tempLabel.Font;
                 Controls.Add(chrs[i]);
             }
         }
@@ -118,6 +119,12 @@ namespace YoketoruVS21
                     startButton.Visible = false;
                     copyrightLabel.Visible = false;
                     hiLabel.Visible = false;
+
+                    for(int i = EnemyIndex; i < ChrMax; i++)
+                    {
+                        chrs[i].Left = rand.Next(ClientSize.Width - chrs[i].Width);
+                        chrs[i].Top = rand.Next(ClientSize.Height - chrs[i].Height);
+                    }
                     break;
 
                 case State.Gameover:
