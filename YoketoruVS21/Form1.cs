@@ -146,19 +146,7 @@ namespace YoketoruVS21
             Point mp = PointToClient(MousePosition);
 
             // TODO: mpがプレイヤーラベルの中心になるように設定
-            chrs[PlayerIndex].Left = mp.X - chrs[PlayerIndex].Width / 2;
-            chrs[PlayerIndex].Top = mp.Y - chrs[PlayerIndex].Height / 2;
 
-            for (int i = EnemyIndex; i < ChrMax; i++)
-            {
-                if (    (mp.X >= chrs[i].Left)
-                    &&  (mp.X < chrs[i].Right)
-                    &&  (mp.Y >= chrs[i].Top)
-                    &&  (mp.Y < chrs[i].Bottom))
-                {
-                    MessageBox.Show("重なった!!");
-                }
-            }
         }
 
         private void startButton_Click(object sender, EventArgs e)
