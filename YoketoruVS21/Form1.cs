@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace YoketoruVS21
 {
@@ -59,6 +60,17 @@ namespace YoketoruVS21
         public Form1()
         {
             InitializeComponent();
+
+            if (File.Exists("hisc.txt"))
+            {
+                string hi = File.ReadAllText("hisc.txt");
+                string trimhi = hi.Trim();  // 空白や改行消す
+                int fhi;
+                if (int.TryParse(trimhi, out fhi))
+                {
+                    hiscore = fhi;
+                }
+            }
 
             for(int i = 0; i < ChrMax; i++)
             {
@@ -159,6 +171,8 @@ namespace YoketoruVS21
                     {
                         hiscore = time;
                         hiLabel.Text = $"HighScore {hiscore}";
+
+                        File.WriteAllText("hisc.txt", $"{hiscore}\n");
                     }
                     break;
             }
