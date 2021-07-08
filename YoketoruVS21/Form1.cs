@@ -15,12 +15,16 @@ namespace YoketoruVS21
     {
         const bool isDebug = true;
 
+        const int SpeedMax = 20;
+
         const int PlayerMax = 1;
         const int EnemyMax = 3;
         const int ItemMax = 3;
         const int ChrMax = PlayerMax + EnemyMax + ItemMax;
 
         Label[] chrs = new Label[ChrMax];
+        int[] vx = new int[ChrMax];
+        int[] vy = new int[ChrMax];
 
         const int PlayerIndex = 0;
         const int EnemyIndex = PlayerMax;
@@ -124,6 +128,8 @@ namespace YoketoruVS21
                     {
                         chrs[i].Left = rand.Next(ClientSize.Width - chrs[i].Width);
                         chrs[i].Top = rand.Next(ClientSize.Height - chrs[i].Height);
+                        vx[i] = rand.Next(-SpeedMax, SpeedMax + 1);
+                        vy[i] = rand.Next(-SpeedMax, SpeedMax + 1);
                     }
                     break;
 
@@ -151,6 +157,26 @@ namespace YoketoruVS21
 
             for (int i = EnemyIndex; i < ChrMax; i++)
             {
+                chrs[i].Left += vx[i];
+                chrs[i].Top += vy[i];
+
+                if (chrs[i].Left < 0)
+                {
+                    vx[i] = Math.Abs(vx[i]);
+                }
+                if (chrs[i].Top < 0)
+                {
+                    vy[i] = Math.Abs(vy[i]);
+                }
+                if (chrs[i].Right > ClientSize.Width)
+                {
+                    vx[i] = -Math.Abs(vx[i]);
+                }
+                if (chrs[i].Bottom > ClientSize.Height)
+                {
+                    vy[i] = -Math.Abs(vy[i]);
+                }
+
                 if (    (mp.X >= chrs[i].Left)
                     &&  (mp.X < chrs[i].Right)
                     &&  (mp.Y >= chrs[i].Top)
