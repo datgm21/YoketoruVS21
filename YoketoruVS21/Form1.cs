@@ -121,7 +121,8 @@ namespace YoketoruVS21
                     gameOverLabel.Visible = false;
                     titleButton.Visible = false;
                     clearLabel.Visible = false;
-                   break;
+                    hiLabel.Text = $"HighScore {hiscore}";
+                    break;
 
                 case State.Game:
                     titleLabel.Visible = false;
