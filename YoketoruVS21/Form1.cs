@@ -51,6 +51,7 @@ namespace YoketoruVS21
 
         int itemCount;
         int time = 0;
+        int hiscore = 0;
 
         [DllImport("user32.dll")]
         public static extern short GetAsyncKeyState(int vKey);
@@ -152,6 +153,12 @@ namespace YoketoruVS21
                     //MessageBox.Show("Clear");
                     clearLabel.Visible = true;
                     titleButton.Visible = true;
+                    hiLabel.Visible = true;
+                    if (time > hiscore)
+                    {
+                        hiscore = time;
+                        hiLabel.Text = $"HighScore {hiscore}";
+                    }
                     break;
             }
         }

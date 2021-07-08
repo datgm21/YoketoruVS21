@@ -139,7 +139,7 @@ namespace YoketoruVS21
             this.clearLabel.AutoSize = true;
             this.clearLabel.Font = new System.Drawing.Font("メイリオ", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.clearLabel.ForeColor = System.Drawing.Color.Red;
-            this.clearLabel.Location = new System.Drawing.Point(215, 156);
+            this.clearLabel.Location = new System.Drawing.Point(222, 108);
             this.clearLabel.Name = "clearLabel";
             this.clearLabel.Size = new System.Drawing.Size(154, 48);
             this.clearLabel.TabIndex = 8;
