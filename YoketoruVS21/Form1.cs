@@ -16,6 +16,7 @@ namespace YoketoruVS21
         const bool isDebug = true;
 
         const int SpeedMax = 20;
+        const int StartTime = 100;
 
         const int PlayerMax = 1;
         const int EnemyMax = 3;
@@ -47,6 +48,9 @@ namespace YoketoruVS21
 
         State currentState = State.None;
         State nextState = State.Title;
+
+        int itemCount;
+        int time = 0;
 
         [DllImport("user32.dll")]
         public static extern short GetAsyncKeyState(int vKey);
@@ -128,9 +132,14 @@ namespace YoketoruVS21
                     {
                         chrs[i].Left = rand.Next(ClientSize.Width - chrs[i].Width);
                         chrs[i].Top = rand.Next(ClientSize.Height - chrs[i].Height);
+                        chrs[i].Visible = true;
                         vx[i] = rand.Next(-SpeedMax, SpeedMax + 1);
                         vy[i] = rand.Next(-SpeedMax, SpeedMax + 1);
                     }
+
+                    itemCount = ItemMax;
+                    time = StartTime+1;
+                    leftLabel.Text = $"★:{itemCount}";
                     break;
 
                 case State.Gameover:
@@ -149,6 +158,9 @@ namespace YoketoruVS21
 
         void UpdateGame()
         {
+            time--;
+            timeLabel.Text = $"Time {time}";
+
             Point mp = PointToClient(MousePosition);
 
             // TODO: mpがプレイヤーラベルの中心になるように設定
@@ -157,6 +169,8 @@ namespace YoketoruVS21
 
             for (int i = EnemyIndex; i < ChrMax; i++)
             {
+                if (!chrs[i].Visible) continue;
+
                 chrs[i].Left += vx[i];
                 chrs[i].Top += vy[i];
 
@@ -182,7 +196,22 @@ namespace YoketoruVS21
                     &&  (mp.Y >= chrs[i].Top)
                     &&  (mp.Y < chrs[i].Bottom))
                 {
-                    MessageBox.Show("重なった!!");
+                    //MessageBox.Show("重なった!!");
+                    if (i < ItemIndex)
+                    //if (chrs[i].Text == EnemyText)
+                    {
+                        nextState = State.Gameover;
+                    }
+                    else
+                    {
+                        chrs[i].Visible = false;
+                        itemCount--;
+                        leftLabel.Text = $"★:{itemCount}";
+                        if(itemCount <= 0)
+                        {
+                            nextState = State.Clear;
+                        }
+                    }
                 }
             }
         }
