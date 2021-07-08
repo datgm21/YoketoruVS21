@@ -13,14 +13,14 @@ namespace YoketoruVS21
 {
     public partial class Form1 : Form
     {
-        const bool isDebug = true;
+        const bool isDebug = false;
 
         const int SpeedMax = 20;
-        const int StartTime = 100;
+        const int StartTime = 200;
 
         const int PlayerMax = 1;
-        const int EnemyMax = 3;
-        const int ItemMax = 3;
+        const int EnemyMax = 10;
+        const int ItemMax = 10;
         const int ChrMax = PlayerMax + EnemyMax + ItemMax;
 
         Label[] chrs = new Label[ChrMax];
