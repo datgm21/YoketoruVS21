@@ -160,6 +160,10 @@ namespace YoketoruVS21
         {
             time--;
             timeLabel.Text = $"Time {time}";
+            if (time <= 0)
+            {
+                nextState = State.Gameover;
+            }
 
             Point mp = PointToClient(MousePosition);
 
